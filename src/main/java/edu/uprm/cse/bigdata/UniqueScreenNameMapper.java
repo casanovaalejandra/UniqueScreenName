@@ -23,11 +23,12 @@ public class UniqueScreenNameMapper extends Mapper<LongWritable, Text,Text, IntW
         //usando twitter4j se convierte el string jason ( el twitter object) a un Status object
         //y con este puedes seleccionar el texto como un field a leer
         //fuente: https://flanaras.wordpress.com/2016/01/11/twitter4j-status-object-string-json/
-
+        Text screenName2 = null;
         Status status = null;
         try {
             status = TwitterObjectFactory.createStatus(tweet);
             screeName = status.getUser().getScreenName(); //this gets the screen name of each user
+
             context.write(new Text(screeName),new IntWritable(1)); //this saves a key value pair of that name and a 1
 
         } catch (TwitterException e) {
